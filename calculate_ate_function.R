@@ -24,6 +24,8 @@ calculate_ate <- function(treatment, reponse) {
 # Test example:
 # A <- c(1, 1, 1, 1, 0, 0, 0, 0, 0)
 # mrate <- c(11, 14, 24, 20, 26, 20, 3, 7, 8)
-# M <- cbind(A, mrate)
-# result <- calculate_ate(M[, "A"], M[, "mrate"])
+# hcover =c(0.06,0.07,0.06,0.07,0.07,0.06, 0.02,0.02,0.01)
+# pcdocs =c(0.02, 0.01,0.02,0.01,0.02,0.01,0.04,0.04,0.05)
+# M = data.frame(A,mrate,hcover,pcdocs)
+# result <- calculate_ate(M$A, M$mrate)
 # print(result)
