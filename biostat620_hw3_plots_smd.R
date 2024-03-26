@@ -1,5 +1,11 @@
 # BIOSTAT 620 HW #3 Problem 2C
 
+# data is raw data file
+# treat_col is the column in data with the treatment options
+# prop_scores is the fitted model for propensity scores
+# t0 is the name of treatment 0
+# t1 is the name of treatment 1
+# var is the variable of interest after subsetting based on treatments
 quality_plots_smd <- function(data, treat_col, prop_scores, t0, t1, var)
 {
   data_sub <- data[,treat_col]
