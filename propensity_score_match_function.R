@@ -19,3 +19,9 @@ propscorematch <- function(data, formula, y) {
   }
   return(matches)
 }
+
+# Example from 'propensityW24.pdf'
+# test <- data.frame(treatment = c(1, 1, 1, 1, 0, 0, 0, 0, 0),
+#                  hcover = c(0.6, 0.7, 0.5, 0.7, 0.7, 0.6, 0.2, 0.2, 0.1),
+#                  pcdocs = c(0.02, 0.01, 0.02, 0.01, 0.02, 0.01, 0.04, 0.04, 0.05))
+# propscorematch(data = test, formula = treatment ~ hcover + pcdocs, y = test$treatment)
