@@ -1,31 +1,27 @@
-calculate_ate <- function(treatment, reponse) {
-  # Split treatment and control groups
-  treatment_group <- reponse[treatment == 1]
-  control_group <- reponse[treatment == 0]
+calculate_ate <- function(response, match_pairs) {
+  # Split treatment and control groups using match pairs list
+  treatment_row <- sapply(match_pairs, function(x) x[1])
+  control_row <- sapply(match_pairs, function(x) x[2])
+  treatment_group <- response[treatment_row]
+  control_group <- response[control_row]
   
   # Calculate the average treatment effect (ATE)
   ate <- mean(treatment_group) - mean(control_group)
   
   # Standard error for ATE
+  n <- length(match_pairs)
   n_treatment <- length(treatment_group)
   n_control <- length(control_group)
   sd <- sqrt(var(treatment_group) / n_treatment + var(control_group) / n_control)
-  standard_error <- sd / sqrt(min(n_treatment, n_control))
+  standard_error <- sd / sqrt(n)
   
   # Statistic scores
   t_stat <- ate / standard_error
-  df <- min(n_treatment, n_control) - 1
+  df <- n - 1
   p_value <- 2 * pt(-abs(t_stat), df)
   
   # Return the results
   list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value)
 }
-
 # Test example:
-# A <- c(1, 1, 1, 1, 0, 0, 0, 0, 0)
-# mrate <- c(11, 14, 24, 20, 26, 20, 3, 7, 8)
-# hcover =c(0.06,0.07,0.06,0.07,0.07,0.06, 0.02,0.02,0.01)
-# pcdocs =c(0.02, 0.01,0.02,0.01,0.02,0.01,0.04,0.04,0.05)
-# M = data.frame(A,mrate,hcover,pcdocs)
-# result <- calculate_ate(M$A, M$mrate)
-# print(result)
+# calculate_ate(M$mrate, match)
