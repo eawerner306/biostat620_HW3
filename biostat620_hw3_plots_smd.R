@@ -28,3 +28,11 @@ quality_plots_smd <- function(data, treat_col, prop_scores, t0, t1, var)
   smd <- numer/denom
   return(smd)
 }
+
+# Example
+# test <- data.frame(treatment = c(1, 1, 1, 1, 0, 0, 0, 0, 0),
+#   hcover = c(0.6, 0.7, 0.5, 0.7, 0.7, 0.6, 0.2, 0.2, 0.1),
+#   pcdocs = c(0.02, 0.01, 0.02, 0.01, 0.02, 0.01, 0.04, 0.04, 0.05))
+# prop_fitted <- propscorematch(data = test, formula = treatment ~ hcover + pcdocs, y = test$treatment)
+# example_hcover <- quality_plots_smd(test, "treatment", prop_fitted, 0, 1, hcover)
+# example_pcdocs <- quality_plots_smd(test, "treatment", prop_fitted, 0, 1, pcdocs)
