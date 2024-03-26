@@ -1,3 +1,4 @@
+# input paramater response has to be a vector
 calculate_ate <- function(response, match_pairs) {
   # Split treatment and control groups using match pairs list
   treatment_row <- sapply(match_pairs, function(x) x[1])
@@ -24,4 +25,6 @@ calculate_ate <- function(response, match_pairs) {
   return(list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value))
 }
 # Test example:
-# calculate_ate(M$mrate, match)
+# result = calculate_ate(M$mrate, match)
+# print(result$ATE)
+# print(result$p.value)
