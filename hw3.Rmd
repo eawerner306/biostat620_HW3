@@ -7,6 +7,7 @@
  hcover =c(0.06,0.07,0.06,0.07,0.07,0.06, 0.02,0.02,0.01)
  pcdocs =c(0.02, 0.01,0.02,0.01,0.02,0.01,0.04,0.04,0.05)
  M = data.frame(A,mrate,hcover,pcdocs)
+ 
 propscorematch <- function(data, formula, y) {
   # create model
   model <- glm(formula, data = data, family = binomial(link = "logit"))
@@ -29,9 +30,9 @@ propscorematch <- function(data, formula, y) {
   return(list(Match.pairs = matches, Propensity = prop_score))
 }
 # Test example:
- result_a = propscorematch(data = M, formula = A ~ hcover + pcdocs, y = M$A)
- print(result_a$Match.pairs)
- print(result_a$Propensity)
+result_a = propscorematch(data = M, formula = A ~ hcover + pcdocs, y = M$A)
+print(result_a$Match.pairs)
+print(result_a$Propensity)
 ```
 
 #(b)
@@ -92,8 +93,8 @@ quality_plots_smd <- function(data, match_pairs, prop_scores, var_col)
   #TODO: color
   plot(hist_prop_score_treat, xlim=c(0,1), ylim=c(-50,50),
        main="Histograms of Propensity Scores by Treatment",
-       xlab="Propensity Scores", color="blue")
-  lines(hist_prop_score_control, color="red")
+       xlab="Propensity Scores", col="blue")
+  lines(hist_prop_score_control, col="red")
   legend("topright", "Treatment 1", "Treatment 0",
          fill=c("blue", "red"), cex=0.5)
   
