@@ -21,7 +21,7 @@ calculate_ate <- function(response, match_pairs) {
   p_value <- 2 * pt(-abs(t_stat), df)
   
   # Return the results
-  list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value)
+  return(list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value))
 }
 # Test example:
 # calculate_ate(M$mrate, match)
