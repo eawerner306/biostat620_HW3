@@ -3,8 +3,8 @@ calculate_ate <- function(response, match_pairs) {
   # Split treatment and control groups using match pairs list
   treatment_row <- sapply(match_pairs, function(x) x[1])
   control_row <- sapply(match_pairs, function(x) x[2])
-  treatment_group <- response[treatment_row]
-  control_group <- response[control_row]
+  treatment_group <- response[unlist(treatment_row)]
+  control_group <- response[unlist(control_row)]
   
   # Calculate the average treatment effect (ATE)
   ate <- mean(treatment_group) - mean(control_group)
