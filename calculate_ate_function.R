@@ -14,17 +14,22 @@ calculate_ate <- function(response, match_pairs) {
   n_treatment <- length(treatment_group)
   n_control <- length(control_group)
   sd <- sqrt(var(treatment_group) / n_treatment + var(control_group) / n_control)
-  standard_error <- sd / sqrt(n)
+  #standard_error <- sd / sqrt(n)
   
   # Statistic scores
-  t_stat <- ate / standard_error
-  df <- n - 1
-  p_value <- 2 * pt(-abs(t_stat), df)
+  t_res <- t.test(treatment_group, control_group, paired = TRUE)
+  standard_error <- t_res$stderr
+  t_stat <- t_res$statistic[["t"]]
+  p_value <- t_res$p.value
   
   # Return the results
   return(list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value))
 }
+
 # Test example:
-# result = calculate_ate(M$mrate, match)
-# print(result$ATE)
-# print(result$p.value)
+# match = propscorematch(data = M, formula = A ~ hcover + pcdocs, y = M$A)$Match.pairs
+# result_b = calculate_ate(M$mrate, match)
+# print(result_b$ATE)
+# print(result_b$Sd.Error)
+# print(result_b$t.stat)
+# print(result_b$p.value)
