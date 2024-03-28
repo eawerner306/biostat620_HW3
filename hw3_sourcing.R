@@ -34,17 +34,10 @@ calculate_ate <- function(response, match_pairs) {
   # Calculate the average treatment effect (ATE)
   ate <- mean(treatment_group) - mean(control_group)
 
-  # Standard error for ATE
-  n <- length(match_pairs)
-  n_treatment <- length(treatment_group)
-  n_control <- length(control_group)
-  sd <- sqrt(var(treatment_group) / n_treatment + var(control_group) / n_control)
-  standard_error <- sd / sqrt(n)
-
-  # Statistic scores
-  t_stat <- ate / standard_error
-  df <- n - 1
-  p_value <- 2 * pt(-abs(t_stat), df)
+  t_res <- t.test(treatment_group, control_group)
+  standard_error <- t_res$stderr
+  t_stat <- t_res$statistic[["t"]]
+  p_value <- t_res$p.value
 
   # Return the results
   return(list(ATE = ate, Sd.Error = standard_error, t.stat = t_stat, p.value = p_value))
