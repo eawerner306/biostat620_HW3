@@ -34,7 +34,7 @@ calculate_ate <- function(response, match_pairs) {
   # Calculate the average treatment effect (ATE)
   ate <- mean(treatment_group) - mean(control_group)
 
-  t_res <- t.test(treatment_group, control_group)
+  t_res <- t.test(treatment_group, control_group, paired=TRUE)
   standard_error <- t_res$stderr
   t_stat <- t_res$statistic[["t"]]
   p_value <- t_res$p.value
